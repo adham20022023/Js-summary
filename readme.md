@@ -429,3 +429,62 @@ for(let i=1;i<=rows;i++){
     document.getElementById("myrectangle").innerHTML += "<br>";
 }
 ```
+### functions 
+- Define code once , and use it many times.
+- to perform some code, call the function
+```
+function myfunction(){
+    console.log("Hello");
+}
+myfunction();
+```
+### return statement
+- used to return a value from a function
+```
+function myfunction(){
+    return "Hello";
+}
+let result = myfunction();
+console.log(result);
+```
+### ternary operator
+- Shortcut for an 'if/else statement'
+    - Takes 3 operands 
+        - condition
+        - value if true
+        - value if false
+- condition? expertrue:experfalse
+```
+let a = 5;
+let b = 10;
+let c = a > b ? "a is greater than b" : "b is greater than a";
+console.log(c);
+```
+### variable scope 
+- where a variable is accessible 
+- let = variable are limited to block scope {}
+- var = variable are global scope(){}
+- global variable = is declared outside any function
+    - if global,var will change browser window properties
+```
+for (var i =0;i<=3;i++){
+    console.log(i);
+}
+console.log(i);// if we use let instead of var we will get an error
+```
+### Template Literals
+- delimited with (`) instead of double or single quotes allows embedded variables and expressions ${ }
+```
+let username= "bro";
+let items =3;
+let total =75;
+// console.log("hello " + username + " you have " + items + " items and your total is " + total);
+console.log(`Hello ${username} you have ${items} items and your total is ${total}`);
+```
+### format currency
+- eString () = returns a string with a language representations of this number
+- toLocaleString () = returns a string with a language representations of this number
+- number.toLocaleString(locale,{options})
+- e' = specify that languages (undefined = default set in browser)
+- ns' = object with formatting options 
+- 'locale'= specify that language (undefined =  )

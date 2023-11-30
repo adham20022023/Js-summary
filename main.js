@@ -1,9 +1,5 @@
-let symbol= window.prompt("Enter symbol");
-let rows = window.prompt("Enter number of rows");
-let cols= window.prompt("Enter number of columns");
-for(let i=1;i<=rows;i++){
-    for(let j=1;j<=cols;j++){
-        document.getElementById("myrectangle").innerHTML += symbol;
-    }
-    document.getElementById("myrectangle").innerHTML += "<br>";
-}
+let username= "bro";
+let items =3;
+let total =75;
+// console.log("hello " + username + " you have " + items + " items and your total is " + total);
+console.log(`Hello ${username} you have ${items} items and your total is ${total}`);
