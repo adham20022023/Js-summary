@@ -463,7 +463,7 @@ console.log(c);
 ### variable scope 
 - where a variable is accessible 
 - let = variable are limited to block scope {}
-- var = variable are global scope(){}
+- var = variable are global scope(){} `javascript hoisting`
 - global variable = is declared outside any function
     - if global,var will change browser window properties
 ```
@@ -485,6 +485,16 @@ console.log(`Hello ${username} you have ${items} items and your total is ${total
 - eString () = returns a string with a language representations of this number
 - toLocaleString () = returns a string with a language representations of this number
 - number.toLocaleString(locale,{options})
-- e' = specify that languages (undefined = default set in browser)
-- ns' = object with formatting options 
-- 'locale'= specify that language (undefined =  )
+- 'locale'= specify that language (undefined = default )
+-  'options'=object with formatting options
+```
+let mynum= 123456.798;
+// mynum=mynum.toLocaleString("en-US");
+// mynum=mynum.toLocaleString("hi-IN");
+// mynum=mynum.toLocaleString("en-US", {style:"currency", currency:"USD"});
+let mynum2=0.5;
+mynum2=mynum2.toLocaleString(undefined,{style:"percent"});
+let mynum3=55;
+mynum3=mynum3.toLocaleString(undefined,{style:"unit", unit:"celsius"});
+console.log(mynum3);
+```
