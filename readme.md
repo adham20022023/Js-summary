@@ -1,11 +1,11 @@
 ## Js Summary
 ### introduction
-#### what is heck is JavaScript
-- A Web-based programming language:
-    - add interactive behavior to webpages
-    - build web and mobile applications
-    - create command line tools
-    - develop games
+- what is heck is JavaScript
+    - A Web-based programming language:
+        - add interactive behavior to webpages
+        - build web and mobile applications
+        - create command line tools
+        - develop games
 - Java is not equal to JavaScript
 - knowing Html & Css is helpful , but not necessary until much later DOM (document object model)
 ```
@@ -182,7 +182,7 @@ document.getElementById("submit").onclick= function(){
 <button id="reset">Reset</button>
 <p id="countable">0</p>
 ```
-- ex- 3 rolling dice guessing game
+###  ex- 3 rolling dice guessing game
 - Js Code
 ```
   let x,y,z;
@@ -482,7 +482,6 @@ let total =75;
 console.log(`Hello ${username} you have ${items} items and your total is ${total}`);
 ```
 ### format currency
-- eString () = returns a string with a language representations of this number
 - toLocaleString () = returns a string with a language representations of this number
 - number.toLocaleString(locale,{options})
 - 'locale'= specify that language (undefined = default )
@@ -497,4 +496,178 @@ mynum2=mynum2.toLocaleString(undefined,{style:"percent"});
 let mynum3=55;
 mynum3=mynum3.toLocaleString(undefined,{style:"unit", unit:"celsius"});
 console.log(mynum3);
+```
+### simple guessing game
+
+- Html 
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Number Guessing Game</h1>
+    <p>Pick a # between 1 - 10</p>
+    <label for="">Enter a guess</label>
+    <input type="text" id="guess">
+    <input type="submit" id="submit_btn">
+    <script src="main.js"></script>
+</body>
+</html>
+```
+- Js Code
+```
+const answer= Math.floor(Math.random() * 10 + 1);
+let guesses=0;
+document.getElementById('submit_btn').onclick = function(){
+    let guess = document.getElementById('guess').value;
+    guesses++;
+    if(guess==answer){
+        alert(`${answer} is the #. it took you ${guesses} guesses`);
+    }else if(guess>answer){
+        alert("Too high");
+    }
+    else{
+        alert("Too low");
+    }
+    }
+```
+### convert temperature
+- html code
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <label >Enter a temperature</label>
+    <input type="text" id="temp_box">
+    <br>
+    <label >Convert TO:</label><br>
+    <input type="radio" id="cbutton" name="unit">
+    <label >Celsius</label>
+    <input type="radio" id="fbutton" name="unit">
+    <label >Fahrenheit</label>
+    <br>
+    <button type="submit" id="submit_btn">Convert</button>
+    <p id="result"></p>
+    <script src="main.js"></script>
+</body>
+</html>
+```
+- JS code
+```
+function converttof(temp){
+    return (temp*9/5)+32
+}
+function converttoc(temp){
+    return (temp-32)*(5/9)
+}
+document.getElementById('submit_btn').onclick = function(){
+    let input_temp=document.getElementById('temp_box').value;
+    input_temp=Number(input_temp);
+    if(document.getElementById('cbutton').checked)
+    {
+        document.getElementById('result').innerHTML=converttoc(input_temp) +"C";
+    }
+    else if(document.getElementById('fbutton').checked){
+        document.getElementById('result').innerHTML=converttof(input_temp) +"F";
+    }
+    else {
+        document.getElementById('result').innerHTML="Please select a unit";
+    }
+}
+```
+### arrays 
+```
+// array  = think of it as a variable that can store multiple values
+let fruits = ["apple","banana","mango"];
+console.log(fruits)
+console.log(fruits[0])// access single element
+fruits[1] = "orange"
+console.log(fruits)//update value
+fruits.push("lemon");//add element at end
+console.log(fruits)
+fruits.pop();//remove element
+console.log(fruits)
+fruits.unshift("kiwi");//add element at the beginning
+console.log(fruits)
+fruits.shift();//remove element from beginning
+console.log(fruits)
+let length=fruits.length;
+let index=fruits.indexOf("mango");// return index but -1 if not found 
+console.log(index)
+console.log(length)
+```
+### Iterate over arrays
+```
+let prices=[100,200,300,400,500];
+//! standard
+// for(let i=0;i<prices.length;i++){
+//     console.log(prices[i]);
+// }
+//! new way
+for(let price of prices){
+    console.log(price);
+}
+```
+### array sorting
+```
+let fruits=['apple','banana','mango','orange'];
+fruits.sort().reverse();
+for (let fruit of fruits){
+    console.log(fruit);
+}
+```
+## array of arrays 2D
+```
+// 2D array = an array of arrays
+let fruits=['apple','mango','banana'];
+let vegetables=['carrot','onion','potato'];
+let meats=['chicken','beef','pork'];
+let food=[fruits,vegetables,meats];
+// lets say we want to replace apple with banana
+food[0][0]='banana';
+food[0][2]= 'apple';
+console.log(food);
+for (let i=0;i<food.length;i++)
+{   
+    console.log('----------');
+    for(let one of food[i]){
+        console.log(one);
+    }
+}
+```
+### Spread Operator 
+// spread operator = allow an iterable such as an array or string to be expanded in places where zero or more arguments are expected (unpacks the elements)
+```
+//! usecase 1 
+// spread operator = allow an iterable such as an array or string to be expanded in places where zero or more arguments are expected (unpacks the elements)
+// let username="Adham"
+// let numbers = [1,2,3,4,5,6,7]
+// console.log(...username);
+// x=Math.max(...numbers)
+// console.log(x);
+
+//! usecase 2 
+// let class1 = ['Adham', 'Ahmed', 'Hossam'];
+// let class2 = ['Ahmed', 'salah', 'Amr'];
+// class1.push(...class2)
+// console.log(...class1)
+
+//! usecase 3 
+// const numbers = [1, 2, 3];
+// const sum = (a, b, c) => a + b + c;
+// console.log(...numbers)
+// const result = sum();
+// console.log(result); // الناتج سيكون 6
+
 ```
