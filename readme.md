@@ -671,3 +671,35 @@ for (let i=0;i<food.length;i++)
 // console.log(result); // الناتج سيكون 6
 
 ```
+### rest parameters
+- allow function to accept an indefinite number of arguments as an array
+```
+let a = 1; 
+let b = 2;
+let c = 3;
+let d = 4; 
+console.log(sum(a,b,c,d));
+function sum(...numbers){
+    let total= 0;
+    for( let number of numbers){
+        total+=number;
+    }
+    return total;
+}
+```
+### Callback function
+- A function passed as an argument to another function
+- Ensure that a function is not going to run before a task is completed helps us develop asynchronous code.
+(when one function has to wait for another function) that helps us avoid errors and potential problems Ex. wait for a file to load
+```
+// callback = a function passed as an argument to another function
+displayconsole(sum(2,3));
+function sum(x,y){
+    let result= x+y;
+    return result
+}
+function displayconsole(output){
+    console.log(output)
+}
+
+```
