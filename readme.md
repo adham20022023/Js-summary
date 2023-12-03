@@ -703,3 +703,238 @@ function displayconsole(output){
 }
 
 ```
+### array.foreach() 
+- executes a provided callback function once for each array element
+```
+
+
+
+let students=["sana","sara","sana","sara","sana","sara"];
+students.forEach(capitalize);
+students.forEach(print);
+function capitalize(element,index,array){
+    array[index]=element[0].toUpperCase()+element.slice(1);
+
+}
+
+function print(element){
+    console.log(element)
+}
+```
+### arraymap Vs arrayforeach
+- array.map() = executes a provided callback function once for each array element and creates a new array
+```
+let numbers = [1,2,3,4,5];
+let squares=numbers.map(square)
+squares.forEach(print);
+function square(element){
+    return Math.pow(element,2);
+}
+function print(element){
+    console.log(element)
+}
+```
+- array.forEach() = executes a provided callback function once for each array element but apply on the same place
+```
+numbers.forEach(square2);
+numbers.forEach(print);
+function print(element){
+    console.log(element)
+}
+function square2(element,index,array){
+    array[index]=Math.pow(element,2);
+}
+```
+### array.filter()
+-  creates a new array with all elements that pass the test provided by a function
+```
+let ages = [3, 10, 18, 20,33, 40, 50];
+let adults=ages.filter(check_age);
+adults.forEach(element => console.log(element));
+function check_age(age){
+    return age>18
+}
+```
+### array.reduce()
+- array.reduce() = reduces an array to a single value
+- accumulator(storage point), current value
+- 0 -> initial value for the accumulator
+```
+
+let prices=[5,10,15,20];
+
+let total= prices.reduce(checkout,0);
+console.log(total);
+function checkout(total,element){
+    return total + element;
+}
+```
+### sort() 
+- sort without callback function will sort based on UTF-16 code units
+```
+let grades = [100,50 ,90,60,80,70];
+grades = grades.sort(descendingsort);
+grades.forEach(print);
+function descendingsort(x,y){
+    return y-x;
+}
+function ascendingsort(x,y){
+    return x-y;
+}
+function print(element){
+    console.log(element)
+}
+```
+### Function Expression
+- function without a name (anonymous function) avoid polluting the global scope with names Write it, then forget about it 
+> EX-1
+```
+const greeting= function (){
+     console.log("Hello!");
+}
+greeting();
+```
+Ex-2 Without Anonymous Function
+- Html Code
+```
+    <label for="" id="countable">0</label>
+    <button id="add">+</button>
+    <button id="sub">-</button>
+```
+- js Code
+```
+let count=0;
+function increase(){
+    count++;
+    document.getElementById('countable').innerHTML=count
+}
+
+function decrease(){
+     count--;
+     document.getElementById('countable').innerHTML=count
+}
+document.getElementById('add').onclick=increase
+document.getElementById('sub').onclick=decrease
+document.getElementById('sub').onclick=decrease
+```
+- Ex-3 With Anonymous Function
+- Html Code
+```
+    <label for="" id="countable">0</label>
+    <button id="add">+</button>
+    <button id="sub">-</button>
+```
+- js Code
+```
+let count=0;
+document.getElementById('add').onclick= function(){
+    count++;
+    document.getElementById('countable').innerHTML=count
+}
+document.getElementById('sub').onclick= function(){
+    count--;
+    document.getElementById('countable').innerHTML=count
+}
+```
+### Arrow Function 
+- arrow function = compact alternative to a traditional function =>
+- note you can't use function keyword like this function(name)
+```
+const greeting = (name)=> console.log(`Hello ${name}`);
+```
+### Shuffle Array
+```
+let cards= ["queen", "queen", "king", "king", "jack", "jack"];
+length= cards.length;
+for (let i=0;i<length;i++){
+    let random= Math.floor(Math.random()*length);
+    let temp=cards[i];
+    cards[i]=cards[random];
+    cards[random]=temp;
+}
+console.log(cards)
+```
+### Nested Function
+- function inside other functions.
+outer function have access to inner function but inner function are "hidden" from outside
+```
+let username="admin"
+let password=1234;
+function login(username,password){
+    function check_username_password(){
+        if(username=="admin" && password == 1234){
+            return true 
+        }
+        else {
+            return false
+        }
+    }
+    let auth=check_username_password();
+    function auth_check(){
+        if(auth == true){
+            console.log( "login success")
+        }
+        else {
+            console.log( "login failed")
+        }
+    }
+    auth_check()
+
+}
+login(username,password)
+```
+### Map 
+- object that holds key-value pairs of any data type
+```
+const store = new Map([
+    ["t-shirt",20],
+    ["Jeans",30],
+    ["socks",20],
+]);
+let shoppingcart =0;
+shoppingcart +=store.get("t-shirt"); // get value of key
+shoppingcart +=store.get("Jeans");
+console.log(shoppingcart)
+store.set("hat",40); // add new key value pair
+store.delete("hat"); // delete element from map
+store.has("hat");// return true if it exists false if not 
+
+
+console.log(store.size); // 3 rows
+store.forEach((value,key) => console.log(`${key} : ${value}`))
+```
+### Object 
+- A group of properties and methods properties = what an object has methods = what an object can do use to access properties/methods
+```
+const car = {
+    model:"Mustang",
+    color:"red",
+    year:2023,
+    drive: function (){
+        console.log("You Drive this car ")
+    }
+}
+console.log(car.model)
+console.log(car.color)
+car.drive();
+```
+### this 
+- This = reference to a particular object 
+- The object depends on the immediate context 
+```
+const car = {
+    model:"Mustang",
+    color:"red",
+    year:2023,
+    drive: function (){
+        console.log("You Drive this car ")
+    },
+    info: function (){
+        console.log(car.model) 
+        console.log(this.color)// this = car refers to the class
+        // console.log(model)// model is not defined
+    }
+}
+car.info();
+```
+
