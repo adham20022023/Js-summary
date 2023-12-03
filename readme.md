@@ -931,10 +931,165 @@ const car = {
     },
     info: function (){
         console.log(car.model) 
-        console.log(this.color)// this = car refers to the class
+        console.log(this.color)// this = car refers to the object you are in
         // console.log(model)// model is not defined
     }
 }
 car.info();
 ```
+### Class 
+- a blueprint for creating objects define what properties and methods they have use a constructor for unique properties 
+```
+class player{
+    score =0;
+    pause(){
+        console.log("You Paused the game");
+    }
+    exit(){
+        console.log("You exited the game");
+    }
+}
+const player1=new player();
+player1.score++;
+console.log(player1.score);
+player1.exit();
+```
+### constructor 
+- a special method of a class, accepts arguments and assign properties 
+```
+class student {
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+    }
+    study(){
+        console.log(`${this.name} is studying`)
+    }
+}
+const student1= new student('John', 20)
+student1.study();
+```
+### static 
+- belongs to the class, not the objects 
+    - properties: useful for caches fixed-configuration 
+    - methods: useful for utility functions
+```
+class user{
+    static visits=0;
+    constructor(name,age){
+        this.name = name
+        this.age = age
+        user.visits++;
+    }
+    static getVisits(){
+        console.log(user.visits);
+    }
 
+}
+const user1 = new user("John", 30);
+const user2 = new user("adham", 30);
+const user3 = new user("mohamed", 30);
+user.getVisits();
+```
+### Inheritance 
+- a child class can inherit all the methods and properties from its parent class 
+```
+class person {
+    constructor(name, age) {
+        this.name = name
+        this.age = age
+    }
+    walk(){
+        console.log(`${this.name} is walking`)
+    }
+}
+class student extends person{
+    study(){
+        console.log(`${this.name} is studying`)
+    }
+}
+const student1 = new student("John", 20);
+student1.walk();// method from parent class 
+```
+### Super Keyword
+- Refers to the parent class. Commonly used to invoke constructor of a parent class
+```
+class animal {
+ constructor(name,age){
+     this.name=name;
+     this.age=age
+ }
+}
+class rabbit extends animal {
+    constructor(name,age,runspeed){
+        super(name,age);
+        this.runspeed=runspeed
+    }
+}
+class fish extends animal {
+    constructor(name,age,swimspeed){
+        super(name,age);
+
+        this.swimspeed=swimspeed    
+    }
+}
+class Hawk extends animal {
+
+    constructor(name,age,flyspeed){
+        super(name,age);
+        this.flyspeed=flyspeed
+    }
+}
+//note it will give error if we extends from parent and not use super
+const rabbit1 = new rabbit("rabbit",5,10);
+const fish1 = new fish("fish",5,10);
+const hawk1 = new Hawk("hawk",5,10);
+console.log(fish1.name);
+```
+### Get & Set
+- Get : Binds an object property to a function when that property is accessed
+-  Set : Binds an object property to a function when that property is assigned 
+```
+class car {
+    constructor(power){
+        // _ mean private property
+        this._power = power
+        this._gas = 25
+    }
+    get power(){
+        return this._power
+    }
+    get gas(){
+        return `${this._gas}L (${this._gas/50 *100}%)`
+    }
+    set gas(value){
+        if( value < 0 ){
+            this._gas = 0
+        }else if( value > 50 ){
+            this._gas = 50
+        }else{
+            this._gas = value
+        }
+    }
+}
+let car1 = new car(100,50);
+// car1._power=200 // this not right to access private property directly
+console.log(car1.power)
+car1.gas = 40
+console.log(car1.gas)
+```
+### Anonymous Object 
+- an object without a name not directly referenced less syntax. not need for unique names
+```
+class car {
+    constructor(name, year) {
+        this.name = name;
+        this.year = year;
+    }
+}
+const cars=[new car("Mustang", 2023),new car("BMW", 2022),new car("Ferrari", 2021)]
+console.log(cars[0].name)
+console.log(cars[1].name)
+console.log(cars[2].name)
+
+```
