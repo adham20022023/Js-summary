@@ -1091,5 +1091,267 @@ const cars=[new car("Mustang", 2023),new car("BMW", 2022),new car("Ferrari", 202
 console.log(cars[0].name)
 console.log(cars[1].name)
 console.log(cars[2].name)
+```
+### Error 
+- Object with a description of something went wrong
+- Can't open a file Lose connection User types   incoreect input TypeError
+```
+try{
+   let x = window.prompt("Enter a #")
+   x=Number(x);
+   if(isNaN(x))  throw "that wasn't a number!";
+   if(x=="")  throw "that was empty!";
+   console.log(` ${x} is a number`)
+}
+catch(error){
+    console.log(error);
+}
+finally{
+    console.log("This always Executes")
+}
+```
+### setTimeout()
+- invokes a function after a number of miliseconds asynchronous function (doesn't pause execuation)
+```
+let price = 500
+let item= "crypto"
+let timer1 = setTimeout(firstmessage, 3000,item,price)
+// secondmessage();
+let timer2 = setTimeout(secondmessage, 4000)
+let timer3 = setTimeout(thirdmessage, 6000)
+
+
+
+function firstmessage(){
+    alert(`buy this ${item} for ${price}`)
+}
+function secondmessage(){
+    alert("This is not a scam!")
+}
+function thirdmessage(){
+    alert("Do IT!!!!!!!!!")
+}
+document.getElementById("mybutton").onclick=function(){
+    clearTimeout(timer1);
+    clearTimeout(timer2);
+    clearTimeout(timer3);
+    alert("Thank you for your time!")
+}
+```
+### setInterval()
+- invokes a function repeatedly after a number of
+  asynchronous function (doesn't pause execuation)
+```
+let count = 0;
+let max = window.prompt("Count up to what number#?");
+max= Number(max);
+const mytimer=setInterval(countUp,1000);
+
+function countUp(){
+    count++;
+    console.log(count);
+    if(count>=max){
+        clearInterval(mytimer);
+    }
+}
+```
+### Date Object 
+- used to work with dates  & times 
+```
+let date = new Date();
+// let date = new Date(0);
+//! year month day hours minutes seconds milliseconds
+// let date = new Date(2023,0,1,2,3,4,5);
+// let date = new Date("January 1 , 2023 00:00:00")
+let year      = date.getFullYear();
+let daymonth  = date.getDate();
+let dayofweek = date.getDay();
+let month= date.getMonth();
+let hour= date.getHours();
+let minute= date.getMinutes();
+let second= date.getSeconds();
+let millisecond= date.getMilliseconds();
+// date.setFullYear(2002);
+// date = date.toLocaleDateString();
+function formatdate(date){
+    let year= date.getFullYear();
+    let month= date.getMonth();
+    let day= date.getDate();
+    return `${year}/${month}/${day}`;
+
+}
+function formatetime(date){
+    let hour= date.getHours();
+    let minute= date.getMinutes();
+    let second= date.getSeconds();
+    let amorpm= hour >=12 ? "pm" : "am";
+    hour = 12 % 12 ||12 ; // || 0 || 12 => 12 
+    console.log(hour)
+    return `${hour}:${minute}:${second} ${amorpm}`;
+}   
+document.getElementById("mylabel").innerHTML = formatdate(date) + "<br>"+formatetime(date);
+// console.log(date);
+```
+- html 
+```
+    <label for="" id="mylabel"></label>
+```
+### Make Clock 
+- html 
+```
+    <label for="" id="mylabel"></label>
+    <button id="mybutton">Start</button>
+```
+- js
+```
+const mylabel =  document.getElementById("mylabel");
+update();
+setInterval(update,1000);
+function update (){
+    let date= new Date();
+    mylabel.innerHTML = formattime(date);
+    function formattime(){
+        let hours=date.getHours();
+        let minutes=date.getMinutes();
+        let seconds=date.getSeconds();
+        let amorpm= hours>=12 ? "PM" : "AM";
+        hours=hours%12 || 12;
+        hours=formatzeros(hours);
+        minutes=formatzeros(minutes);
+        seconds=formatzeros(seconds);
+        return hours+":"+minutes+":"+seconds+" "+amorpm;
+    }
+    function formatzeros(time){
+        time=time.toString();
+        return time.padStart(2,"0");
+    }
+}
+```
+### Synchronous VS Asynchronous
+- Synchronous = In an orderd sequence Step-by-Step Linear Instructions (start now finsih now)
+- Asynchronous = out of Sequence.
+  Ex. Access  a database Fetch a file Tasks that take time (start now ,finsh sometime later)
+```
+console.log("Start");
+//console.log("This is synchronous");
+setTimeout(() => {
+    console.log("This is asynchronous");
+}, 0);
+console.log("end")
+```
+### Console.time()
+- Starts a timer you can use to trach how long an operation takes give each timer a unique name.
+- note that it track only synchronous task
+```
+console.time("Response time")
+// alert("Click the ok button");
+setTimeout(() => {
+    console.log("Hello world")
+}, 5000);
+console.timeEnd("Response time")
+```
+### Promise 
+- Promise In JavaScript Is Like Promise In Real Life
+- Promise Is Something That Will Happen In The Future
+- Promise Avoid Callback Hell
+- Promise Is The Object That Represent The Status Of An Asynchronous Operation And Its Resulting Value
+
+- Promise Status
+  - Pending: Initial State
+  - Fulfilled: Completed Successfully
+  - Rejected: Failed
+
+  -Story
+    - Once A Promise Has Been Called, It Will Start In A Pending State
+    - The Created Promise Will Eventually End In A Resolved State Or In A Rejected State
+    - Calling The Callback Functions (Passed To Then And Catch) Upon Finishing.
+
+    - Then
+      - Takes 2 Optional Arguments [Callback For Success Or Failure]
+```
+// const mypromise= new Promise((resolve,reject)=>{
+//     let connect =true;
+//     if(connect){
+//         resolve('connection established');
+//     }
+//     else{
+//         reject(Error('connection failed'));
+//     }
+// }).then(
+//     (resolvevalue)=> console.log(`Good ${resolvevalue}`),
+//     (rejectvalue)=> console.log(`Bad ${rejectvalue}`)
+// )
+const mypromise= new Promise((resolve,reject)=>{
+    let connect =true;
+    if(connect){
+        resolve('connection established');
+    }
+    else{
+        reject(Error('connection failed'));
+    }
+})
+console.log(mypromise)//first execute
+let resolver=(resolvevalue) => console.log(`Good ${resolvevalue}`)
+let rejecter=(rejectvalue) => console.log(`Bad ${rejectvalue}`)
+mypromise.then(
+    resolver,
+    rejecter
+);
+mypromise.then(
+    resolver,
+    rejecter
+);
+mypromise.then(
+    resolver,
+    rejecter
+);
 
 ```
+### Promise Training
+- We Will Go To The Meeting, Promise Me That We Will Find The 4 Employees
+  - then(We Will Choose Two People)
+  - then(We Will Test Them Then Get One Of Them)
+  - catch(No One Came)
+
+  - Then => Promise Is Successfull Use The Resolved Data
+  - Catch => Promise Is Failed, Catch The Error
+  - Finally => Promise Successfull Or Failed Finally Do Something
+  ```
+  const mypromise = new Promise((resolve, reject) => {
+    let employees =[]
+    if(employees.length === 4 ){
+        resolve(employees);
+    }
+    else { 
+        reject(Error("Number of employees is not 4 "));
+    }
+});
+mypromise.then(
+    (resolvervalue) =>{
+        resolvervalue.length=2;
+        return resolvervalue;
+
+    }
+    )
+mypromise.then(
+    (resolvervalue) =>{
+        resolvervalue.length=1;
+        return resolvervalue;
+
+    }
+    )
+mypromise.then(
+    (resolvervalue) =>{
+        console.log("The chosen employee is "+resolvervalue)
+
+}
+).catch(
+    (rejectvalue) =>{
+        console.log(rejectvalue)
+    }
+).finally(
+    console.log("The Operation Is Done")
+)
+   
+
+  ```
