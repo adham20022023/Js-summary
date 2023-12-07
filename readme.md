@@ -1316,7 +1316,7 @@ mypromise.then(
   - Then => Promise Is Successfull Use The Resolved Data
   - Catch => Promise Is Failed, Catch The Error
   - Finally => Promise Successfull Or Failed Finally Do Something
-  ```
+```
   const mypromise = new Promise((resolve, reject) => {
     let employees =[]
     if(employees.length === 4 ){
@@ -1352,6 +1352,15 @@ mypromise.then(
 ).finally(
     console.log("The Operation Is Done")
 )
-   
+```
+- Promise = object that encapsulates the result of an let asynchronous methods return values like "I promise to return something in the future"
+```
+const wait = (time) => new Promise((resolve) => setTimeout(resolve, time));
 
-  ```
+
+
+wait(1000).then(
+    () => console.log('1 second passed')
+)
+```
+
