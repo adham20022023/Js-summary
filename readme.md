@@ -1363,4 +1363,86 @@ wait(1000).then(
     () => console.log('1 second passed')
 )
 ```
+### Async 
+- makes a function return a promise 
+  ```
+    async function loadfile(){
+        let fileloaded=true;
+        if(fileloaded){
+            return("File loaded")
+        }
+        else {
+            throw new Error("File not loaded")
+        }
+    }
 
+    loadfile().then(value => console.log(value))
+    .catch(error => console.log(error))
+    // another way of doing it 
+    function loadfile(){
+        let fileloaded=true;
+        if(fileloaded){
+            
+            return Promise.resolve("File loaded")
+        }
+        else {
+            return Promise.reject("File not loaded")
+        }
+    }
+  ```
+### Await 
+- await = make an async function wait for a promise 
+```
+async function loadfile(){
+    let fileloaded=false;
+    if(fileloaded){
+        return("File loaded")
+    }
+    else {
+        throw ("File not loaded")
+    }
+}
+
+async function startprocess(){
+    try {
+        //only work inside async function
+        let message =await loadfile()
+        console.log(message)
+    }
+    catch(error){
+        console.log(error)
+    }
+
+}
+startprocess();
+```
+### Modules
+- The idea behind a module is that it's a file of resuable code
+- we can import sections of pre-written code to use whenever we need it
+- Great for any general utility values and functions
+- Helps to make your code more readable and maintainable
+- Think of modules as seperate chapters of a book
+- Html 
+```
+    <script type="module" src="main.js"></script>
+```
+- main.js
+```
+import { PI, getcirumference, getarea } from "/math_util.js";
+import * as math from "/math_util.js";
+
+console.log(math.PI)// how to access from other import way
+let radius = 10;
+console.log(getcirumference(radius));
+console.log(getarea(radius));
+```
+- math_util.js
+```
+export const PI =3.14;
+export function getcirumference(radius) {
+    return 2*PI*radius;
+}
+export function getarea(radius) {
+    return PI*radius*radius;
+}
+```
